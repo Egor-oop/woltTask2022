@@ -47,4 +47,14 @@ public class Order {
     public LocalDateTime getTime() {
         return time;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "cartValue=" + cartValue +
+                ", deliveryDistance=" + deliveryDistance +
+                ", numberOfItems=" + numberOfItems +
+                ", time=" + time +
+                '}';
+    }
 }

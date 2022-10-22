@@ -2,17 +2,22 @@ package com.egorgulido.woltTask2022;
 
 public class DeliveryFee {
 
-    public int fee;
+    public int deliveryFee;
 
     public DeliveryFee(int fee) {
-        this.fee = fee;
+        this.deliveryFee = fee;
     }
 
-    public void setFee(int fee) {
-        this.fee = fee;
+    public void setDeliveryFee(int deliveryFee) {
+        this.deliveryFee = deliveryFee;
     }
 
-    public int getFee() {
-        return fee;
+    public int getDeliveryFee() {
+        return deliveryFee;
     }
+
+    public void addToFee(int fee) {
+        setDeliveryFee(getDeliveryFee() + fee);
+    }
+
 }

@@ -26,20 +26,10 @@ public class OrderController {
         DeliveryFee fee = new DeliveryFee(0);
         FeeCounter countFee = new FeeCounter();
 
-        if (order.getCartValue() < 100) {
-            fee.setDeliveryFee(100 - order.getCartValue());
-        }
-
-        if (order.getNumberOfItems() >= 5) {
-            fee.setDeliveryFee(
-                    fee.getDeliveryFee() + (
-                            (order.getNumberOfItems() - 4) * 50
-                    )
-            );
-        }
-
-        fee.addToFee(countFee.countFeeByDistance(order.getDeliveryDistance()));
-
+        // Counting the delivery fee
+        countFee.countFeeByCartValue(fee, order.getCartValue());
+        countFee.countFeeByNumberOfItems(fee, order.getNumberOfItems());
+        countFee.countFeeByDistance(fee, order.getDeliveryDistance());
         countFee.countFeeByTime(fee, order);
 
         if (order.getCartValue() >= 10000) {

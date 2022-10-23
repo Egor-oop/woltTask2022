@@ -19,7 +19,6 @@ public class OrderController {
 
     @PostMapping
     public DeliveryFee CountFee(@RequestBody Order order) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ");
         log.info("" + order);
 
         // Init a fee and a feeCounter

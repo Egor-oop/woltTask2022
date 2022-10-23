@@ -4,7 +4,9 @@ import com.egorgulido.woltTask2022.order.Order;
 import com.egorgulido.woltTask2022.order.OrderController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FeeCounter {
 
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);

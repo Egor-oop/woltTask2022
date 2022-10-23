@@ -20,4 +20,10 @@ public class DeliveryFee {
         setDeliveryFee(getDeliveryFee() + fee);
     }
 
+    @Override
+    public String toString() {
+        return "DeliveryFee{" +
+                "deliveryFee=" + deliveryFee +
+                '}';
+    }
 }

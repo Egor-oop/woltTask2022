@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.format.DateTimeFormatter;
-
 @RestController
 @RequestMapping(path = "/")
 public class OrderController {
@@ -26,16 +24,7 @@ public class OrderController {
         FeeCounter countFee = new FeeCounter();
 
         // Counting the delivery fee
-        countFee.countFeeByCartValue(fee, order.getCartValue());
-        countFee.countFeeByNumberOfItems(fee, order.getNumberOfItems());
-        countFee.countFeeByDistance(fee, order.getDeliveryDistance());
-        countFee.countFeeByTime(fee, order);
-
-        if (order.getCartValue() >= 10000) {
-            fee.setDeliveryFee(0);
-        } else if (fee.getDeliveryFee() > 1500) {
-            fee.setDeliveryFee(1500);
-        }
+        countFee.countFee(fee, order);
 
         return fee;
     }

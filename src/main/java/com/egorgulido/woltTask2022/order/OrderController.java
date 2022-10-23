@@ -21,11 +21,12 @@ public class OrderController {
 
     @PostMapping
     public DeliveryFee CountFee(@RequestBody Order order) {
-        log.info("" + order);
+        log.info("Request order - " + order);
 
         DeliveryFee fee = new DeliveryFee(0); // Init a fee
         feeCounter.countFee(fee, order); // Counting the delivery fee
 
+        log.info("Delivery fee -- " + fee);
         return fee;
     }
 }

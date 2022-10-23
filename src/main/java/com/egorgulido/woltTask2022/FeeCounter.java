@@ -4,12 +4,28 @@ import com.egorgulido.woltTask2022.order.Order;
 import com.egorgulido.woltTask2022.order.OrderController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FeeCounter {
 
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
 
-    public void countFeeByCartValue(DeliveryFee fee, int cartValue) {
+    public void countFee(DeliveryFee fee, Order order) {
+        countFeeByCartValue(fee, order.getCartValue());
+        countFeeByNumberOfItems(fee, order.getNumberOfItems());
+        countFeeByDistance(fee, order.getDeliveryDistance());
+        countFeeByTime(fee, order);
+
+        if (order.getCartValue() >= 10000) {
+            fee.setDeliveryFee(0);
+        }
+        if (fee.getDeliveryFee() > 1500) {
+            fee.setDeliveryFee(1500);
+        }
+    }
+
+    private void countFeeByCartValue(DeliveryFee fee, int cartValue) {
         /*
             Add difference between a cart value and 10 euro,
             if the cart value is less than 10 euro
@@ -20,7 +36,7 @@ public class FeeCounter {
         }
     }
 
-    public void countFeeByNumberOfItems(DeliveryFee fee, int numberOfItems) {
+    private void countFeeByNumberOfItems(DeliveryFee fee, int numberOfItems) {
         /*
             Add 50 cents supercharge to the delivery fee
             by every cart item after first 4 items
@@ -31,7 +47,7 @@ public class FeeCounter {
         }
     }
 
-    public void countFeeByDistance(DeliveryFee fee, int distance) {
+    private void countFeeByDistance(DeliveryFee fee, int distance) {
         /*
             Add 1 euro to the delivery fee every 500 meters
 
@@ -51,7 +67,7 @@ public class FeeCounter {
         fee.addToFee(supercharge);
     }
 
-    public void countFeeByTime(DeliveryFee fee, Order order) {
+    private void countFeeByTime(DeliveryFee fee, Order order) {
         /*
             Add 1.1x supercharge to the delivery fee
             during Friday rush at 3-7 PM
